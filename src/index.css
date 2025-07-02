@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 255 255 255;
+    --line: 234 235 237;
+    --ink: 26 27 29;
+    --muted: 104 109 116;
+    --accent: 37 87 214;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 21 22 24;
+    --line: 44 46 50;
+    --ink: 232 233 235;
+    --muted: 150 155 162;
+    --accent: 138 172 255;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.18);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: rgb(var(--muted) / 0.4);
+    transition: color 0.15s, text-decoration-color 0.15s;
+  }
+
+  .link:hover {
+    color: rgb(var(--accent));
+    text-decoration-color: rgb(var(--accent));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
