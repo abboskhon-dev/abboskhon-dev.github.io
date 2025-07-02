@@ -1,0 +1,259 @@
+{
+  "ui": {
+    "now": "now",
+    "nav": {
+      "work": "Work",
+      "other": "Other projects",
+      "writing": "Writing",
+      "contact": "Contact"
+    },
+    "headline": [
+      "Software Engineer · Lead Mobile Developer at ",
+      ""
+    ],
+    "bio": [
+      "I work across mobile, web and native systems, from building products from scratch to optimizing performance-critical code.",
+      "At Neutune I built the iOS and Android app from an empty repository and now lead its development, and I build its web applications. I've had C++ performance work merged into one of Software Mansion's React Native libraries, and I write my own open-source tools for diagnosing performance and stability problems in React Native and Android apps.",
+      "Previously I was the founding engineer at WWBW. I studied Computer Science at UNIST."
+    ],
+    "email": "Email",
+    "resume": "Résumé (PDF)",
+    "location": "Seoul, South Korea",
+    "sections": {
+      "work": "Selected work",
+      "other": "Other projects",
+      "writing": "Writing",
+      "background": "Education and research",
+      "skills": "Skills"
+    },
+    "readOnLinkedIn": "Read on LinkedIn",
+    "researchNote": "Full research note",
+    "contact": "The quickest way to reach me is email: ",
+    "theme": {
+      "light": "Switch to light theme",
+      "dark": "Switch to dark theme"
+    },
+    "switchLang": "Читать на русском",
+    "sectionsLabel": "Sections",
+    "builtWith": "Built with: ",
+    "openShot": "Open screenshot: ",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "showMore": "Show {n} more",
+    "showLess": "Show less",
+    "details": "Details",
+    "hideDetails": "Hide details"
+  },
+  "projects": {
+    "mixaudio": {
+      "tagline": "Play songs and remake them by chatting with an AI that rearranges the stems",
+      "role": "Lead Mobile Developer",
+      "company": "Neutune",
+      "summary": "MixAudio lets people play songs and remixes and remake them by asking an AI agent to rearrange the individual instrument tracks, on the web and on phones. I started the iOS and Android app from an empty repo, wrote most of it and shipped it to 0.9.0; on the web I own the player, the queue and the studio's track grid.",
+      "parts": [
+        {
+          "label": "iOS & Android",
+          "highlights": [
+            "Stopped playback crashing on busy songs. On a Galaxy S21 the native render thread was running at 94–160% of a core; I shared clip buffers instead of copying each stem, added fast paths for settled parameters and moved output off an underrunning low-latency stream. In on-device profiling, a 16-stem, 3-minute mix with heavy effects now renders at 60–65% of one core.",
+            "Patched the react-native-audio-api engine in C++: a two-stage convolver for reverb, a feedback-delay node, separate output buffers for nodes with several consumers, and a shared worklet runtime that fixed a crash.",
+            "Ported the web reverb, delay and Signalsmith time-stretch to native nodes, with parity checks against Chrome: reverb and delay at zero lag and a residual of -60 dB or lower, time-stretch spectra within -50 dB.",
+            "Cut process CPU by about 35% and JS-thread CPU by 30% while stems load on a Galaxy S21.",
+            "Made the feed and players smoother: streamed playback instead of decoding whole files, covers drawn off the JS thread with Skia, and a progress bar that no longer redraws the screen every frame."
+          ]
+        },
+        {
+          "label": "Web",
+          "highlights": [
+            "Cut time to first sound by up to 9×: playback starts once the first second of every stem has loaded. On Fast 4G a 13-stem song went from 3.65 s to 1.78 s, and a 23-stem, 10 MB project from 13 s to 1.41 s.",
+            "Removed the freeze on every mute and solo: loudness is now measured in cancellable time slices, cached by what's rendered and reused on undo.",
+            "Virtualized the studio's track grid in both directions, with one shared context menu and tooltip per grid and full keyboard navigation that snaps to clip and section edges.",
+            "Built the player, queue, up-next panel and workspace bottom player."
+          ]
+        }
+      ]
+    },
+    "neusynth": {
+      "tagline": "AI sample-generation plugin for music software (VST3 / AU)",
+      "role": "Audio Plugin Engineer",
+      "company": "Neutune",
+      "summary": "A plugin that generates audio samples with AI inside music software such as Cubase and Logic. I've worked on it since v0.1.",
+      "highlights": [
+        "Built musical key detection in C++ from scratch, with a benchmark tool that scores it the way the MIREX research evaluations do.",
+        "Added native crash reporting inside DAW hosts. Because the plugin shares a process with the host, reports keep only the plugin's own stack frames, computed at startup to avoid a loader-lock deadlock.",
+        "Recovered generations interrupted by a dropped connection, and added audio trimming and context range selection.",
+        "Connected the C++ engine to the Vue interface, and led the redesigned V2 interface and its component system.",
+        "Added saving, searching, favoriting and reloading of generated audio.",
+        "Cut the landing page's animated background from about 120 ms to 9 ms per frame with pixel-identical output, and added English and Korean localization.",
+        "Fixed Cubase integration and the macOS release process."
+      ]
+    },
+    "tenant": {
+      "tagline": "Web apps for managing a music catalog and working with artists",
+      "role": "Frontend Engineer",
+      "company": "Neutune",
+      "summary": "A set of internal and partner web apps for running a music catalog.",
+      "highlights": [
+        "Designed and built the Tagger app on my own: people mark song sections directly on the audio waveform.",
+        "Built artist analytics, track performance dashboards and the flow for submitting new works.",
+        "Built reporting and usage analytics pages for the admin app.",
+        "Built chart components shared across several apps."
+      ]
+    },
+    "thounds": {
+      "tagline": "Mobile music-creation app",
+      "role": "Lead Developer",
+      "company": "Blooming Grace × Neutune",
+      "summary": "A music-creation app built jointly by Neutune and Blooming Grace. I designed it from scratch and led its development.",
+      "highlights": [
+        "Designed the app architecture, state management and UI system.",
+        "Built an audio engine that plays multiple stems in sync, each with its own controls.",
+        "Implemented waveform display and punch-in recording at any position on the timeline.",
+        "Shipped the core workflows and audio features to production."
+      ]
+    },
+    "react-native-audio-api": {
+      "tagline": "Software Mansion's audio engine for React Native",
+      "role": "Merged contributor",
+      "company": "Software Mansion",
+      "summary": "A performance feature and several fixes merged into the native C++ core of Software Mansion's React Native audio engine.",
+      "highlights": [
+        "Rebuilt the convolver as a two-stage partitioned convolver that computes long reverb tails on worker threads, cutting incremental reverb cost 8.8× (922M to 105M cycles per second) on a Galaxy S21 with output identical to the original.",
+        "Fixed Android output-stream sharing, looping in AudioBufferSourceNode, start() duration timing and true-stereo convolution gain."
+      ]
+    },
+    "thread-inspector": {
+      "tagline": "A local flight recorder for React Native freezes",
+      "role": "Author",
+      "company": "Open source, MIT license",
+      "summary": "When the JS or main thread stalls in a release build, it saves an incident: what was running, how sure it is, and a trace you can open in Perfetto. Nothing leaves the device.",
+      "highlights": [
+        "Lock-free C++ recorder shared by iOS and Android: one fixed-size ring per thread, 64-byte events, 32–48 ns per event on a Galaxy S21.",
+        "Cut idle overhead on a Galaxy S21 from 1.7% to 0.6% of one core, meeting my 1% goal, by having the watchdog probe idle threads less often.",
+        "A watchdog probes the JS and main queues every 100 ms, backing off to 500 ms for idle threads, and snapshots the last 5 seconds of history the moment a stall starts.",
+        "Each finding states its evidence (direct containment, explicit flow, or temporal overlap only) and reports unattributed time instead of guessing.",
+        "Opt-in adapters for Fabric commits, TurboModule calls, React Navigation, Android frame timings and Hermes stack sampling with source-map symbolication; JS stacks can be saved with every incident.",
+        "Per-thread CPU profiling and, on Android, context-switch counts, plus a CLI that pulls incidents from Android devices, iOS simulators and iPhones, then merges and compares them.",
+        "Core tested under AddressSanitizer and ThreadSanitizer, with 21 C++ and 7 CLI tests. Overhead measured on a real device with paired runs and bootstrap confidence intervals."
+      ]
+    },
+    "adrive": {
+      "tagline": "CLI and MCP server for driving and diagnosing Android apps over adb",
+      "role": "Author",
+      "company": "Open source, MIT license",
+      "summary": "A small CLI and MCP server that reads and drives installed Android apps, including release builds with looping animations or live audio meters, where UiAutomator-based tools stall waiting for idle.",
+      "highlights": [
+        "Reads the accessibility tree without ever waiting for idle: on an animating screen on a Galaxy S21 it answers in 0.10–0.15 s after the first call, where uiautomator dump fails and maestro hierarchy takes 5 s.",
+        "adrive mcp serves every command as an MCP tool over stdio for Claude Code, Cursor and other clients; screenshots come back as images.",
+        "Installs nothing on the device: a small dex runs from /data/local/tmp with shell privileges.",
+        "Diagnoses release builds: CPU per thread, memory and frame jank, audio underruns and buffer sizes, crashes and per-process logs.",
+        "adrive run measures a scenario step by step (frames, jank, CPU per thread, memory) and can record a Perfetto trace.",
+        "Plain text for people, --json for scripts and AI agents; no npm dependencies. CI runs it on emulators for API 26 to 36."
+      ]
+    },
+    "lazymobile": {
+      "tagline": "MCP server for agent-driven mobile QA",
+      "role": "Design collaborator",
+      "company": "Open source",
+      "summary": "Proposed the first MCP tool surface for the project and worked through the design with its maintainer.",
+      "highlights": [
+        "Device control, app lifecycle, bounded logs, screenshots and the safety boundaries around them."
+      ]
+    },
+    "orderai": {
+      "tagline": "AI order automation over KakaoTalk",
+      "role": "Founding Engineer",
+      "company": "WWBW",
+      "summary": "A B2B platform that uses AI to take and manage orders through KakaoTalk. I helped take it from first concept to a working commercial product.",
+      "highlights": [
+        "Built a multi-agent AI ordering system that reads both text and images.",
+        "Shipped the cross-platform B2B app for iOS and Android with Flutter and JavaScript.",
+        "Added image optimization and PDF/Excel export.",
+        "WWBW went on to raise KRW 800 million through ReVentures and the TIPS program."
+      ]
+    }
+  },
+  "article": {
+    "title": "What a React Native freeze recorder can prove",
+    "subtitle": "A case study in building a local flight recorder for React Native, and in being honest about where its evidence runs out.",
+    "points": [
+      "Detecting a stall is easy; that \"easy\" part still hid two bugs.",
+      "Attribution needs explicit relations, not just time overlap.",
+      "React Native internals limit what can be observed.",
+      "The idle overhead comes from watchdog probing, not recording."
+    ]
+  },
+  "research": [
+    {
+      "org": "N2SL Laboratory, UNIST",
+      "role": "Research Assistant",
+      "detail": "Researched Android system optimization under Prof. Youngbin Im and built an eBPF-based analysis tool."
+    },
+    {
+      "org": "UNIST",
+      "role": "Software Engineering Intern",
+      "detail": "Built an automated system that grades student assignments and detects plagiarism."
+    }
+  ],
+  "education": {
+    "school": "Ulsan National Institute of Science and Technology (UNIST)",
+    "degree": "B.S. in Computer Science",
+    "notes": [
+      "UNIST Global Dream Scholarship (2020)",
+      "Coupang HackSeoul hackathon (2024)"
+    ]
+  },
+  "skills": [
+    {
+      "area": "Systems & Audio",
+      "items": [
+        "C++20",
+        "Real-time audio DSP",
+        "JUCE",
+        "Android simpleperf",
+        "Perfetto"
+      ]
+    },
+    {
+      "area": "Mobile",
+      "items": [
+        "React Native",
+        "Expo",
+        "iOS & Android",
+        "JSI",
+        "Fabric",
+        "Hermes",
+        "Flutter"
+      ]
+    },
+    {
+      "area": "Tooling",
+      "items": [
+        "Kotlin",
+        "Objective-C++",
+        "adb",
+        "Native profiling",
+        "CI/CD",
+        "Automated testing"
+      ]
+    },
+    {
+      "area": "Web",
+      "items": [
+        "TypeScript",
+        "Vue",
+        "Nuxt",
+        "React",
+        "Web Audio",
+        "Skia",
+        "Canvas"
+      ]
+    },
+    {
+      "area": "AI",
+      "items": [
+        "LLM integration",
+        "Multi-agent workflows"
+      ]
+    }
+  ]
+}
