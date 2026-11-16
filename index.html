@@ -2,12 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Abboskhon Sobirov" />
     <title>Abboskhon Sobirov</title>
-    <script type="module" crossorigin src="/assets/index-CF7-scH7.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cda7MH_M.css">
+    <meta
+      name="description"
+      content="Abboskhon Sobirov: Lead Mobile Developer at Neutune. Mobile and web apps, real-time audio and AI."
+    />
+    <meta property="og:title" content="Abboskhon Sobirov" />
+    <meta
+      property="og:description"
+      content="Lead Mobile Developer at Neutune. Mobile and web apps, real-time audio and AI."
+    />
+    <meta property="og:url" content="https://abboskhon-dev.github.io" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem("theme"); } catch (e) {}
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-BsQ3Rn1A.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BRwjIQCq.css">
   </head>
   <body>
     <div id="root"></div>
